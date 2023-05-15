@@ -14,11 +14,11 @@ jobs:
         java-version: 11
     - uses: nttld/setup-ndk@v1.2.0
       with:
-        ndk-version: r25b
+        ndk-version: r21e
     - uses: gradle/gradle-build-action@v2
-    - name: Make Java
-      run: bash gradlew assembleRelease
-      working-directory: ./java
     - name: Make NDK
       run: ndk-build NDK_DEBUG=0
       working-directory: ./zygisk/module
+    - name: Make Java
+      run: bash gradlew assembleRelease
+      working-directory: ./java
