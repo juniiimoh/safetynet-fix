@@ -35,5 +35,7 @@ jobs:
       working-directory: ./magisk
     - name: Upload APK
       uses: actions/upload-artifact@v3
-      path: "*.zip"
+      with:
+        name: Module
+        path: ./safetynet-fix-*.zip
 
