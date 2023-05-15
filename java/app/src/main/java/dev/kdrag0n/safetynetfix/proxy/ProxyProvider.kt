@@ -6,8 +6,6 @@ import dev.kdrag0n.safetynetfix.logDebug
 import java.security.Provider
 import kotlin.concurrent.thread
 
-private const val PATCH_DURATION = 2000L
-
 // This is mostly just a pass-through provider that exists to change the provider's ClassLoader.
 // This works because Service looks up the class by name from the *provider* ClassLoader, not
 // necessarily the bootstrap one.
