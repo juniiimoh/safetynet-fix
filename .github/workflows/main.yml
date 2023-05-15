@@ -2,7 +2,7 @@ name: Run Gradle on PRs
 on: 
   workflow_dispatch:
 jobs:
-  gradle:
+  make_java:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -13,9 +13,6 @@ jobs:
       with:
         distribution: temurin
         java-version: 11
-        
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-
-    - run: cd java
+    - uses: gradle/gradle-build-action@v2
+    - working-directory: ./java
     - run: bash gradlew assembleRelease
