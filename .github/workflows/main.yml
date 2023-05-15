@@ -25,17 +25,15 @@ jobs:
     - name: Make zip Module
       run: |
         version="$(grep '^version=' module.prop  | cut -d= -f2)"
-        mkdir -p magisk/zygisk
-        cp "../zygisk/module/libs/arm64-v8a/libsafetynetfix.so" "magisk/zygisk/arm64-v8a.so"
-        cp "../zygisk/module/libs/armeabi-v7a/libsafetynetfix.so" "magisk/zygisk/armeabi-v7a.so"
-        cp "../zygisk/module/libs/x86/libsafetynetfix.so" "magisk/zygisk/x86.so"
-        cp "../zygisk/module/libs/x86_64/libsafetynetfix.so" "magisk/zygisk/x86_64.so"
+        mkdir -p zygisk
+        cp "../zygisk/module/libs/arm64-v8a/libsafetynetfix.so" "zygisk/arm64-v8a.so"
+        cp "../zygisk/module/libs/armeabi-v7a/libsafetynetfix.so" "zygisk/armeabi-v7a.so"
+        cp "../zygisk/module/libs/x86/libsafetynetfix.so" "zygisk/x86.so"
+        cp "../zygisk/module/libs/x86_64/libsafetynetfix.so" "zygisk/x86_64.so"
         unzip "../java/app/build/outputs/apk/release/app-release.apk" "classes.dex"
-        zip -r9 "../safetynet-fix-$version.zip" .
       working-directory: ./magisk
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
-        name: Module
-        path: ./safetynet-fix-*.zip
-
+        name: safetynet-fix-$version@juniiim.zip
+        path: ./magisk/*
