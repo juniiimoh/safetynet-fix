@@ -22,3 +22,12 @@ jobs:
     - name: Make Java
       run: bash gradlew assembleRelease
       working-directory: ./java
+    - name: Make zip Module
+      run: |
+        mkdir -p magisk/zygisk
+        cp "../zygisk/module/libs/arm64-v8a/libsafetynetfix.so" "magisk/zygisk/arm64-v8a.so"
+        cp "../zygisk/module/libs/armeabi-v7a/libsafetynetfix.so" "magisk/zygisk/armeabi-v7a.so"
+        cp "../zygisk/module/libs/x86/libsafetynetfix.so" "magisk/zygisk/x86.so"
+        cp "../zygisk/module/libs/x86_64/libsafetynetfix.so" "magisk/zygisk/x86_64.so"
+        unzip "../java/app/build/outputs/apk/release/app-release.apk" "classes.dex"
+      working-directory: ./magisk
