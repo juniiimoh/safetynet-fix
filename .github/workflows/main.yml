@@ -24,7 +24,7 @@ jobs:
       working-directory: ./java
     - name: Make zip Module
       run: |
-        version="$(grep '^version=' module.prop  | cut -d= -f2)"
+        echo "VERSION=$(grep '^version=' module.prop  | cut -d= -f2)" >> $$GITHUB_ENV
         mkdir -p zygisk
         cp "../zygisk/module/libs/arm64-v8a/libsafetynetfix.so" "zygisk/arm64-v8a.so"
         cp "../zygisk/module/libs/armeabi-v7a/libsafetynetfix.so" "zygisk/armeabi-v7a.so"
@@ -35,5 +35,5 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
-        name: safetynet-fix-$version@juniiim.zip
+        name: safetynet-fix-"${{ env.VERSION }}"@juniiim
         path: ./magisk/*
